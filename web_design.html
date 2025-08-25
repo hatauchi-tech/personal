@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webデザイン・フロントエンド基本用語 学習ガイド</title>
+    <title>Webデザイン・フロントエンド基本用語 学習ガイド (完全版)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,9 +17,7 @@
             --accent-color: #3b82f6;
             --border-color: rgba(0, 0, 0, 0.1);
         }
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
         body {
             font-family: 'Noto Sans JP', 'Inter', sans-serif;
             background-color: #f3f4f6;
@@ -28,8 +26,7 @@
         }
         .glass-card {
             background: rgba(var(--card-background-rgb), 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             border: 1px solid var(--border-color);
             transition: all 0.3s ease;
         }
@@ -37,56 +34,36 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.05), 0 6px 6px rgba(0,0,0,0.07);
         }
-        .live-demo {
-            border: 2px dashed #d1d5db;
+        .live-demo { border: 2px dashed #d1d5db; }
+        .modal-overlay { transition: opacity 0.3s ease; }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out; }
+        .accordion-item.open .accordion-content { max-height: 500px; }
+        .accordion-item.open .accordion-arrow { transform: rotate(180deg); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .tab-link.active { border-color: var(--accent-color); color: var(--accent-color); font-weight: bold; }
+        .carousel-item { display: none; }
+        .carousel-item.active { display: block; }
+        .tooltip { position: relative; display: inline-block; }
+        .tooltip .tooltip-text {
+            visibility: hidden; width: 140px; background-color: #555; color: #fff; text-align: center;
+            border-radius: 6px; padding: 5px 0; position: absolute; z-index: 1; bottom: 125%; left: 50%;
+            margin-left: -70px; opacity: 0; transition: opacity 0.3s;
         }
-        .modal-overlay {
-            transition: opacity 0.3s ease;
-        }
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-in-out;
-        }
-        .accordion-item.open .accordion-content {
-            max-height: 500px; /* 十分な高さを確保 */
-        }
-        .accordion-item.open .accordion-arrow {
-            transform: rotate(180deg);
-        }
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
-        .tab-link.active {
-            border-color: var(--accent-color);
-            color: var(--accent-color);
-            font-weight: bold;
-        }
-        .carousel-item {
-            display: none;
-            transition: opacity 0.5s ease-in-out;
-        }
-        .carousel-item.active {
-            display: block;
-        }
+        .tooltip:hover .tooltip-text { visibility: visible; opacity: 1; }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- Header -->
     <header class="text-center py-12 md:py-20 bg-white/30 backdrop-blur-sm">
         <div class="container mx-auto px-4">
-            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4 tracking-tight">Webデザイン基本用語</h1>
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4 tracking-tight">Webデザイン基本用語 (完全版)</h1>
             <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">見て、触って、動かして学ぶ。インタラクティブ学習ガイド</p>
         </div>
     </header>
 
     <div class="container mx-auto px-4 py-12">
         <div class="lg:flex">
-            <!-- Sticky Navigation -->
             <nav class="lg:w-1/4 lg:sticky top-8 self-start mb-12 lg:mb-0">
                 <div class="glass-card rounded-xl p-6">
                     <h3 class="font-bold text-lg mb-4 text-gray-700">目次</h3>
@@ -98,45 +75,61 @@
                 </div>
             </nav>
 
-            <!-- Main Content -->
             <main class="lg:w-3/4 lg:pl-12">
-                <!-- Category: Layout -->
                 <section id="category-layout" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 border-l-4 border-blue-500 pl-4">🗺️ ページの構成要素・レイアウト編</h2>
                     <div class="space-y-8">
-                        <!-- Term Card: Header & Footer -->
                         <div class="glass-card rounded-xl p-8">
-                            <h3 class="text-2xl font-bold mb-4">ヘッダー &amp; フッター</h3>
-                            <p class="mb-2"><strong class="font-bold">【一言でいうと？】</strong> サイトの「顔」と「まとめ」の部分。</p>
-                            <p class="mb-6"><strong class="font-bold">【身近なもので例えると？】</strong> 手紙の「レターヘッド」と本の「奥付」。</p>
+                            <h3 class="text-2xl font-bold mb-4">ヘッダー, フッター &amp; グローバルナビゲーション</h3>
+                            <p class="mb-2"><strong class="font-bold">【一言でいうと？】</strong> サイトの「顔」「まとめ」「フロア案内板」。</p>
                             <div class="live-demo p-6 rounded-lg bg-gray-50">
-                                <p class="text-center font-bold text-gray-600 mb-4">↓ Liveデモ ↓</p>
                                 <div class="border rounded-lg shadow-md bg-white">
                                     <header class="p-4 border-b bg-gray-100 rounded-t-lg">
-                                        <p class="font-bold text-lg">これがヘッダーです (サイトのロゴやメニューが入ります)</p>
+                                        <p class="font-bold text-lg">ヘッダー</p>
+                                        <nav class="mt-2">
+                                            <p class="font-semibold mb-1">└ グローバルナビゲーション</p>
+                                            <ul class="flex space-x-4 text-blue-600">
+                                                <li><a href="#" class="hover:underline">ホーム</a></li>
+                                                <li><a href="#" class="hover:underline">製品情報</a></li>
+                                                <li><a href="#" class="hover:underline">会社概要</a></li>
+                                            </ul>
+                                        </nav>
                                     </header>
-                                    <div class="p-8 h-32">
-                                        <p class="text-gray-700">ここにメインのコンテンツが入ります。</p>
-                                    </div>
+                                    <div class="p-8 h-20"><p class="text-gray-700">メインコンテンツ</p></div>
                                     <footer class="p-4 border-t bg-gray-100 rounded-b-lg">
-                                        <p class="text-sm text-gray-600">これがフッターです (コピーライトなどが入ります)</p>
+                                        <p class="text-sm text-gray-600">フッター (コピーライトなど)</p>
                                     </footer>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Term Card: First View & Hero Image -->
+                        <div class="glass-card rounded-xl p-8">
+                            <h3 class="text-2xl font-bold mb-4">サイドバー &amp; グリッドレイアウト</h3>
+                            <p class="mb-2"><strong class="font-bold">【一言でいうと？】</strong> メインの横の補足エリアと、格子状の整列術。</p>
+                            <div class="live-demo p-6 rounded-lg bg-gray-50">
+                                <div class="border rounded-lg shadow-md bg-white p-4">
+                                    <p class="text-center font-bold text-gray-600 mb-2">グリッドレイアウトの例</p>
+                                    <div class="flex space-x-4">
+                                        <main class="w-2/3 bg-blue-100 p-4 rounded">
+                                            <p class="font-bold">メインコンテンツ</p>
+                                            <p>記事の本文などがここに入ります。</p>
+                                        </main>
+                                        <aside class="w-1/3 bg-green-100 p-4 rounded">
+                                            <p class="font-bold">サイドバー</p>
+                                            <p>関連情報や広告などがここに入ります。</p>
+                                        </aside>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="glass-card rounded-xl p-8">
                             <h3 class="text-2xl font-bold mb-4">ファーストビュー &amp; ヒーローイメージ</h3>
-                            <p class="mb-2"><strong class="font-bold">【一言でいうと？】</strong> スクロールせずに最初に見える範囲と、そこで使われる主役の画像。</p>
-                            <p class="mb-6"><strong class="font-bold">【身近なもので例えると？】</strong> お店の「ショーウィンドウ」と映画の「ポスター」。</p>
+                             <p class="mb-2"><strong class="font-bold">【一言でいうと？】</strong> スクロールせずに最初に見える範囲と、そこで使われる主役の画像。</p>
                             <div class="live-demo p-6 rounded-lg bg-gray-50">
-                                <p class="text-center font-bold text-gray-600 mb-4">↓ Liveデモ ↓</p>
                                 <div class="border rounded-lg shadow-md bg-white overflow-hidden">
                                     <div class="h-64 bg-cover bg-center flex items-center justify-center text-white text-center p-4" style="background-image: url('https://placehold.co/800x400/3b82f6/ffffff?text=Hero+Image')">
                                         <div class="bg-black/50 p-6 rounded-lg">
-                                            <h4 class="text-3xl font-bold">これがヒーローイメージです</h4>
-                                            <p>この見えている範囲全体がファーストビューの例です。</p>
+                                            <h4 class="text-3xl font-bold">ヒーローイメージ</h4>
+                                            <p>この範囲全体がファーストビューの例です。</p>
                                         </div>
                                     </div>
                                 </div>
@@ -145,80 +138,89 @@
                     </div>
                 </section>
 
-                <!-- Category: UI Components -->
                 <section id="category-ui" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 border-l-4 border-green-500 pl-4">🧩 UIパーツ編</h2>
                     <div class="space-y-8">
-                        <!-- Term Card: Accordion -->
+                        <div class="glass-card rounded-xl p-8">
+                            <h3 class="text-2xl font-bold mb-4">ハンバーガーメニュー</h3>
+                            <p class="mb-2"><strong class="font-bold">【一言でいうと？】</strong> スマホでよく見る三本線のメニューアイコン。</p>
+                            <div class="live-demo p-6 rounded-lg bg-gray-50">
+                                <div class="w-full max-w-xs mx-auto bg-white rounded-lg shadow-md p-4">
+                                    <div class="flex justify-between items-center">
+                                        <p class="font-bold text-lg">スマホサイトのヘッダー</p>
+                                        <div class="space-y-1.5 cursor-pointer">
+                                            <span class="block w-6 h-0.5 bg-gray-700"></span>
+                                            <span class="block w-6 h-0.5 bg-gray-700"></span>
+                                            <span class="block w-6 h-0.5 bg-gray-700"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="glass-card rounded-xl p-8">
+                            <h3 class="text-2xl font-bold mb-4">パンくずリスト</h3>
+                            <p class="mb-2"><strong class="font-bold">【一言でいうと？】</strong> サイト内での自分の現在地を示す道しるべ。</p>
+                            <div class="live-demo p-6 rounded-lg bg-gray-50">
+                                <div class="w-full max-w-md mx-auto bg-white rounded-lg shadow-md p-4">
+                                    <nav class="text-sm text-gray-600">
+                                        <ol class="flex space-x-2">
+                                            <li><a href="#" class="text-blue-600 hover:underline">ホーム</a></li>
+                                            <li><span>&gt;</span></li>
+                                            <li><a href="#" class="text-blue-600 hover:underline">製品一覧</a></li>
+                                            <li><span>&gt;</span></li>
+                                            <li class="font-bold">現在のページ</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
                         <div class="glass-card rounded-xl p-8">
                             <h3 class="text-2xl font-bold mb-4">アコーディオン</h3>
-                            <p class="mb-2"><strong class="font-bold">【一言でいうと？】</strong> クリックで詳細情報が開閉する仕掛け。</p>
-                            <p class="mb-6"><strong class="font-bold">【身近なもので例えると？】</strong> 楽器の「アコーディオン」の蛇腹。</p>
                             <div class="live-demo p-6 rounded-lg bg-gray-50">
-                                <p class="text-center font-bold text-gray-600 mb-4">↓ Liveデモ (クリックしてみてください) ↓</p>
                                 <div class="w-full max-w-md mx-auto bg-white rounded-lg shadow-md p-4 space-y-2 accordion-container">
                                     <div class="accordion-item border-b">
                                         <button class="accordion-header w-full flex justify-between items-center py-3 text-left font-semibold">
                                             <span>質問１：これは何ですか？</span>
                                             <svg class="accordion-arrow w-5 h-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                                         </button>
-                                        <div class="accordion-content">
-                                            <p class="p-3 text-gray-600">回答：これはアコーディオンです。FAQなどでよく使われます。</p>
-                                        </div>
+                                        <div class="accordion-content"><p class="p-3 text-gray-600">回答：アコーディオンです。</p></div>
                                     </div>
                                     <div class="accordion-item">
                                         <button class="accordion-header w-full flex justify-between items-center py-3 text-left font-semibold">
                                             <span>質問２：どうやって使うのですか？</span>
                                             <svg class="accordion-arrow w-5 h-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                                         </button>
-                                        <div class="accordion-content">
-                                            <p class="p-3 text-gray-600">回答：質問部分をクリックすると、答えが開いたり閉じたりします。</p>
-                                        </div>
+                                        <div class="accordion-content"><p class="p-3 text-gray-600">回答：質問をクリックすると答えが開閉します。</p></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Term Card: Modal -->
                         <div class="glass-card rounded-xl p-8">
                             <h3 class="text-2xl font-bold mb-4">モーダル (ポップアップ)</h3>
-                            <p class="mb-2"><strong class="font-bold">【一言でいうと？】</strong> 元の画面の上に覆いかぶさるように表示されるウィンドウ。</p>
-                            <p class="mb-6"><strong class="font-bold">【身近なもので例えると？】</strong> 舞台の「スポットライト」。</p>
                             <div class="live-demo p-6 rounded-lg bg-gray-50 text-center">
-                                <p class="font-bold text-gray-600 mb-4">↓ Liveデモ ↓</p>
                                 <button id="openModalBtn" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors">モーダルを開く</button>
                             </div>
                         </div>
-
-                        <!-- Term Card: Tabs -->
                         <div class="glass-card rounded-xl p-8">
                             <h3 class="text-2xl font-bold mb-4">タブ</h3>
-                            <p class="mb-2"><strong class="font-bold">【一言でいうと？】</strong> 見出しクリックで表示内容を切り替えるパネル。</p>
-                            <p class="mb-6"><strong class="font-bold">【身近なもので例えると？】</strong> ファイルフォルダの「見出し」。</p>
                             <div class="live-demo p-6 rounded-lg bg-gray-50">
-                                <p class="text-center font-bold text-gray-600 mb-4">↓ Liveデモ (タブをクリック) ↓</p>
                                 <div class="w-full max-w-md mx-auto bg-white rounded-lg shadow-md p-4 tab-container">
                                     <div class="flex border-b mb-4">
-                                        <button class="tab-link py-2 px-4 -mb-px border-b-2 border-transparent active" data-tab="tab1">新着情報</button>
+                                        <button class="tab-link py-2 px-4 -mb-px border-b-2 border-transparent active" data-tab="tab1">新着</button>
                                         <button class="tab-link py-2 px-4 -mb-px border-b-2 border-transparent" data-tab="tab2">キャンペーン</button>
                                         <button class="tab-link py-2 px-4 -mb-px border-b-2 border-transparent" data-tab="tab3">イベント</button>
                                     </div>
                                     <div>
-                                        <div id="tab1" class="tab-content active"><p>新着情報の内容がここに表示されます。新しい製品がリリースされました！</p></div>
-                                        <div id="tab2" class="tab-content"><p>キャンペーン情報です。今なら全品10%オフ！</p></div>
-                                        <div id="tab3" class="tab-content"><p>週末に開催されるイベントのお知らせです。ぜひご参加ください。</p></div>
+                                        <div id="tab1" class="tab-content active"><p>新着情報の内容です。</p></div>
+                                        <div id="tab2" class="tab-content"><p>キャンペーン情報の内容です。</p></div>
+                                        <div id="tab3" class="tab-content"><p>イベント情報の内容です。</p></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        <!-- Term Card: Carousel -->
                         <div class="glass-card rounded-xl p-8">
                             <h3 class="text-2xl font-bold mb-4">カルーセル (スライダー)</h3>
-                            <p class="mb-2"><strong class="font-bold">【一言でいうと？】</strong> 複数の画像を左右にスライドさせて見せるパーツ。</p>
-                            <p class="mb-6"><strong class="font-bold">【身近なもので例えると？】</strong> 回転寿司のレーン。</p>
                             <div class="live-demo p-6 rounded-lg bg-gray-50">
-                                <p class="text-center font-bold text-gray-600 mb-4">↓ Liveデモ (矢印をクリック) ↓</p>
                                 <div class="w-full max-w-lg mx-auto bg-white rounded-lg shadow-md p-4 relative carousel-container">
                                     <div class="overflow-hidden relative h-64 rounded-lg">
                                         <div class="carousel-item active"><img src="https://placehold.co/600x300/34d399/ffffff?text=Slide+1" class="w-full h-full object-cover" alt="Slide 1"></div>
@@ -230,14 +232,24 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Term Card: CTA Button -->
+                         <div class="glass-card rounded-xl p-8">
+                            <h3 class="text-2xl font-bold mb-4">ドロップダウンメニュー &amp; ツールチップ</h3>
+                            <p class="mb-2"><strong class="font-bold">【一言でいうと？】</strong> クリックで開く選択肢リストと、マウスを乗せると出る補足説明。</p>
+                            <div class="live-demo p-6 rounded-lg bg-gray-50 text-center">
+                                <div class="inline-block relative mr-8">
+                                    <button class="bg-gray-200 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center">
+                                        <span>ドロップダウン</span>
+                                    </button>
+                                </div>
+                                <div class="tooltip inline-block">
+                                    <button class="bg-gray-200 text-gray-700 font-semibold py-2 px-4 rounded">ここにマウスを乗せて</button>
+                                    <span class="tooltip-text">これがツールチップです！</span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="glass-card rounded-xl p-8">
                             <h3 class="text-2xl font-bold mb-4">CTA (Call to Action) ボタン</h3>
-                            <p class="mb-2"><strong class="font-bold">【一言でいうと？】</strong> ユーザーに行動を促すための目立つボタン。</p>
-                            <p class="mb-6"><strong class="font-bold">【身近なもので例えると？】</strong> 店員さんの「会員カードはお作りしますか？」の一言。</p>
                             <div class="live-demo p-6 rounded-lg bg-gray-50 text-center">
-                                <p class="font-bold text-gray-600 mb-4">↓ Liveデモ (マウスを乗せてみてください) ↓</p>
                                 <a href="#" class="inline-block bg-orange-500 text-white font-bold text-xl py-4 px-8 rounded-lg shadow-lg hover:bg-orange-600 transform hover:scale-105 transition-all">
                                     今すぐ無料で登録する！
                                 </a>
@@ -246,56 +258,74 @@
                     </div>
                 </section>
 
-                <!-- Category: Concepts -->
                 <section id="category-concepts" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 border-l-4 border-purple-500 pl-4">🤔 仕組み・考え方編</h2>
                     <div class="space-y-8">
-                        <!-- Term Card: UI/UX -->
                         <div class="glass-card rounded-xl p-8">
-                            <h3 class="text-2xl font-bold mb-4">UI (ユーザーインターフェース) &amp; UX (ユーザーエクスペリエンス)</h3>
+                            <h3 class="text-2xl font-bold mb-4">レスポンシブデザイン</h3>
+                            <p class="mb-2"><strong class="font-bold">【一言でいうと？】</strong> 画面サイズに応じて見た目が最適化される仕組み。</p>
+                            <div class="live-demo p-6 rounded-lg bg-gray-50">
+                               <p class="text-center font-bold text-gray-600 mb-2">↓ プレビュー画面の幅を変えてみてください ↓</p>
+                               <div class="p-4 bg-indigo-100 rounded-lg text-center">
+                                   <p class="text-2xl font-bold text-indigo-800 md:hidden">スマホサイズです</p>
+                                   <p class="text-2xl font-bold text-indigo-800 hidden md:block">PCサイズです</p>
+                               </div>
+                            </div>
+                        </div>
+                        <div class="glass-card rounded-xl p-8">
+                            <h3 class="text-2xl font-bold mb-4">UI &amp; UX</h3>
                             <div class="md:flex items-center">
                                 <div class="md:w-1/2 mb-6 md:mb-0 md:pr-6">
-                                    <p class="mb-2"><strong class="font-bold text-blue-600">UIとは？</strong> ユーザーとの「接点」。サイトの見た目や操作感のこと。</p>
-                                    <p class="mb-4"><strong class="font-bold">【例えると？】</strong> 自動車の「運転席」。</p>
-                                    <p class="mb-2"><strong class="font-bold text-green-600">UXとは？</strong> サービスを通じて得られる「体験」全体。</p>
-                                    <p><strong class="font-bold">【例えると？】</strong> 「ドライブ全体の楽しさ」。</p>
+                                    <p class="mb-2"><strong class="font-bold text-blue-600">UIとは？</strong> ユーザーとの「接点」。</p>
+                                    <p class="mb-2"><strong class="font-bold text-green-600">UXとは？</strong> サービスを通じて得られる「体験」。</p>
                                 </div>
                                 <div class="md:w-1/2 live-demo p-4 rounded-lg bg-gray-50">
                                     <div class="text-center">
-                                        <div class="p-4 bg-green-100 rounded-full inline-block">
-                                            <p class="font-bold text-green-700">良いUX (楽しい体験)</p>
-                                        </div>
+                                        <div class="p-4 bg-green-100 rounded-full inline-block"><p class="font-bold text-green-700">良いUX (楽しい体験)</p></div>
                                         <div class="text-2xl my-2">↑</div>
-                                        <div class="p-4 bg-blue-100 rounded-lg">
-                                            <p class="font-bold text-blue-700">良いUI (使いやすい見た目)</p>
-                                            <p class="text-sm text-blue-600">ボタンが分かりやすい、文字が読みやすい etc.</p>
-                                        </div>
-                                        <p class="mt-2 text-sm text-gray-600">良いUIが良いUXを生み出す！</p>
+                                        <div class="p-4 bg-blue-100 rounded-lg"><p class="font-bold text-blue-700">良いUI (使いやすい見た目)</p></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Term Card: Accessibility -->
+                        <div class="glass-card rounded-xl p-8">
+                            <h3 class="text-2xl font-bold mb-4">ワイヤーフレーム</h3>
+                            <p class="mb-2"><strong class="font-bold">【一言でいうと？】</strong> 色や装飾を除く前の、骨格だけの「設計図」。</p>
+                            <div class="live-demo p-6 rounded-lg bg-gray-50">
+                                <div class="border-2 border-gray-400 rounded-lg p-4 space-y-4">
+                                    <div class="h-12 bg-gray-300 rounded flex items-center justify-center font-bold text-gray-600">ヘッダー</div>
+                                    <div class="h-24 bg-gray-300 rounded flex items-center justify-center font-bold text-gray-600">ヒーローイメージ</div>
+                                    <div class="flex space-x-4 h-32">
+                                        <div class="w-1/3 bg-gray-300 rounded flex items-center justify-center font-bold text-gray-600">カード</div>
+                                        <div class="w-1/3 bg-gray-300 rounded flex items-center justify-center font-bold text-gray-600">カード</div>
+                                        <div class="w-1/3 bg-gray-300 rounded flex items-center justify-center font-bold text-gray-600">カード</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="glass-card rounded-xl p-8">
                             <h3 class="text-2xl font-bold mb-4">アクセシビリティ</h3>
-                            <p class="mb-2"><strong class="font-bold">【一言でいうと？】</strong> どんな人でも情報やサービスを同じように利用しやすくする考え方。</p>
-                            <p class="mb-6"><strong class="font-bold">【身近なもので例えると？】</strong> 街の「バリアフリー」設計。</p>
+                             <p class="mb-2"><strong class="font-bold">【一言でいうと？】</strong> どんな人でも利用しやすくするという考え方。</p>
                             <div class="live-demo p-6 rounded-lg bg-gray-50">
-                                <p class="text-center font-bold text-gray-600 mb-4">↓ 見えない部分の工夫の例 ↓</p>
                                 <div class="flex items-center justify-center space-x-8">
                                     <div class="text-center">
                                         <img src="https://placehold.co/150x150/f87171/ffffff?text=NG" alt="" class="rounded-lg shadow-md mb-2">
-                                        <p class="font-bold text-red-600">良くない例</p>
-                                        <p class="text-sm text-gray-600">alt属性がない</p>
+                                        <p class="font-bold text-red-600">良くない例 (altなし)</p>
                                     </div>
                                     <div class="text-center">
                                         <img src="https://placehold.co/150x150/34d399/ffffff?text=OK" alt="芝生の上でボールを追いかける柴犬" class="rounded-lg shadow-md mb-2">
-                                        <p class="font-bold text-green-600">良い例</p>
-                                        <p class="text-sm text-gray-600">alt属性で画像の説明がある</p>
+                                        <p class="font-bold text-green-600">良い例 (altあり)</p>
                                     </div>
                                 </div>
-                                <p class="text-xs text-center mt-4 text-gray-500">※音声読み上げソフトは、良い例の画像の内容を「芝生の上でボールを追いかける柴犬」と読み上げてくれます。</p>
+                            </div>
+                        </div>
+                         <div class="glass-card rounded-xl p-8">
+                            <h3 class="text-2xl font-bold mb-4">ホバー</h3>
+                            <p class="mb-2"><strong class="font-bold">【一言でいうと？】</strong> マウスカーソルを要素の上に乗せる操作。</p>
+                            <div class="live-demo p-6 rounded-lg bg-gray-50 text-center">
+                                <button class="bg-purple-500 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 hover:bg-purple-700 hover:shadow-lg hover:scale-110">
+                                    このボタンにマウスを乗せてみてください
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -304,15 +334,13 @@
         </div>
     </div>
 
-    <!-- Modal Structure (hidden by default) -->
     <div id="myModal" class="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 opacity-0 pointer-events-none">
         <div class="modal-content bg-white rounded-lg shadow-2xl p-8 max-w-md w-full transform -translate-y-10 transition-transform duration-300">
             <div class="flex justify-between items-center mb-4">
-                <h2 class="text-2xl font-bold">重要なお知らせ</h2>
+                <h2 class="text-2xl font-bold">モーダルウィンドウ</h2>
                 <button id="closeModalBtn" class="text-gray-500 hover:text-gray-800 text-3xl">&times;</button>
             </div>
-            <p>これがモーダルウィンドウです。ユーザーに特定の情報へ集中してほしい時に使います。</p>
-            <p class="mt-2 text-sm">背景をクリックするか、右上の「×」ボタンで閉じることができます。</p>
+            <p>ユーザーに特定の情報へ集中してほしい時に使います。</p>
         </div>
     </div>
 
@@ -321,96 +349,60 @@
     </footer>
 
     <script>
-        // Accordion Logic
-        const accordionContainer = document.querySelector('.accordion-container');
-        if (accordionContainer) {
-            accordionContainer.addEventListener('click', (e) => {
-                const header = e.target.closest('.accordion-header');
-                if (!header) return;
-                const item = header.parentElement;
-                item.classList.toggle('open');
-            });
-        }
-
-        // Modal Logic
+        // Accordion
+        document.querySelector('.accordion-container')?.addEventListener('click', e => {
+            const header = e.target.closest('.accordion-header');
+            if (header) header.parentElement.classList.toggle('open');
+        });
+        // Modal
         const openModalBtn = document.getElementById('openModalBtn');
         const closeModalBtn = document.getElementById('closeModalBtn');
         const modal = document.getElementById('myModal');
-        const modalContent = modal.querySelector('.modal-content');
-
+        const modalContent = modal?.querySelector('.modal-content');
         const openModal = () => {
             modal.classList.remove('opacity-0', 'pointer-events-none');
             modalContent.classList.remove('-translate-y-10');
         };
-
         const closeModal = () => {
-            modal.classList.add('opacity-0');
-            modalContent.classList.add('-translate-y-10');
-            setTimeout(() => {
-                modal.classList.add('pointer-events-none');
-            }, 300);
+            modal.classList.add('opacity-0', '-translate-y-10');
+            setTimeout(() => modal.classList.add('pointer-events-none'), 300);
         };
-
-        if (openModalBtn) openModalBtn.addEventListener('click', openModal);
-        if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
-        if (modal) {
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    closeModal();
-                }
-            });
-        }
-
-        // Tabs Logic
+        openModalBtn?.addEventListener('click', openModal);
+        closeModalBtn?.addEventListener('click', closeModal);
+        modal?.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+        // Tabs
         const tabContainer = document.querySelector('.tab-container');
         if (tabContainer) {
             const tabLinks = tabContainer.querySelectorAll('.tab-link');
             const tabContents = tabContainer.querySelectorAll('.tab-content');
-            tabContainer.addEventListener('click', (e) => {
+            tabContainer.addEventListener('click', e => {
                 const clickedTab = e.target.closest('.tab-link');
                 if (!clickedTab) return;
-
                 tabLinks.forEach(link => link.classList.remove('active'));
                 clickedTab.classList.add('active');
-
                 const tabId = clickedTab.dataset.tab;
                 tabContents.forEach(content => {
-                    content.classList.remove('active');
-                    if (content.id === tabId) {
-                        content.classList.add('active');
-                    }
+                    content.classList.toggle('active', content.id === tabId);
                 });
             });
         }
-        
-        // Carousel Logic
+        // Carousel
         const carouselContainer = document.querySelector('.carousel-container');
         if (carouselContainer) {
             const items = carouselContainer.querySelectorAll('.carousel-item');
             const prevBtn = carouselContainer.querySelector('.carousel-prev');
             const nextBtn = carouselContainer.querySelector('.carousel-next');
             let currentIndex = 0;
-
-            function showSlide(index) {
-                items.forEach((item, i) => {
-                    item.classList.remove('active');
-                    if (i === index) {
-                        item.classList.add('active');
-                    }
-                });
-            }
-
+            const showSlide = index => items.forEach((item, i) => item.classList.toggle('active', i === index));
             prevBtn.addEventListener('click', () => {
                 currentIndex = (currentIndex - 1 + items.length) % items.length;
                 showSlide(currentIndex);
             });
-
             nextBtn.addEventListener('click', () => {
                 currentIndex = (currentIndex + 1) % items.length;
                 showSlide(currentIndex);
             });
         }
-
     </script>
 </body>
 </html>

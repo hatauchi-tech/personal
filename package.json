@@ -1,0 +1,12 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "## 概要 iPadを用いて顧客との打ち合わせ現場で建築仕様を簡単に入力し、正式な仕様書（PDF形式）を自動で生成するWebアプリケーションです。",
+  "main": "gas-backend.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
